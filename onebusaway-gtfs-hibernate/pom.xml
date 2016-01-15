@@ -7,14 +7,14 @@
   <description>A Java library for reading and writing General Transit Feed Spec feeds into a database</description>
 
   <parent>
-    <groupId>org.onebusaway</groupId>
+    <groupId>hu.webvalto.realcity</groupId>
     <artifactId>onebusaway-gtfs-modules</artifactId>
-    <version>1.3.5-SNAPSHOT</version>
+    <version>1.3.5.WV-SNAPSHOT</version>
   </parent>
 
   <dependencies>
     <dependency>
-      <groupId>org.onebusaway</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>onebusaway-gtfs</artifactId>
       <version>${project.version}</version>
     </dependency>

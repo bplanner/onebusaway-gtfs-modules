@@ -16,13 +16,6 @@
  */
 package org.onebusaway.gtfs.serialization;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.onebusaway.csv_entities.CsvEntityContext;
 import org.onebusaway.csv_entities.CsvEntityReader;
 import org.onebusaway.csv_entities.CsvInputSource;
@@ -30,25 +23,17 @@ import org.onebusaway.csv_entities.CsvTokenizerStrategy;
 import org.onebusaway.csv_entities.EntityHandler;
 import org.onebusaway.csv_entities.schema.DefaultEntitySchemaFactory;
 import org.onebusaway.gtfs.impl.GtfsDaoImpl;
-import org.onebusaway.gtfs.model.Agency;
-import org.onebusaway.gtfs.model.AgencyAndId;
-import org.onebusaway.gtfs.model.FareAttribute;
-import org.onebusaway.gtfs.model.FareRule;
-import org.onebusaway.gtfs.model.FeedInfo;
-import org.onebusaway.gtfs.model.Frequency;
-import org.onebusaway.gtfs.model.IdentityBean;
-import org.onebusaway.gtfs.model.Pathway;
-import org.onebusaway.gtfs.model.Route;
-import org.onebusaway.gtfs.model.ServiceCalendar;
-import org.onebusaway.gtfs.model.ServiceCalendarDate;
-import org.onebusaway.gtfs.model.ShapePoint;
-import org.onebusaway.gtfs.model.Stop;
-import org.onebusaway.gtfs.model.StopTime;
-import org.onebusaway.gtfs.model.Transfer;
-import org.onebusaway.gtfs.model.Trip;
+import org.onebusaway.gtfs.model.*;
 import org.onebusaway.gtfs.services.GenericMutableDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class GtfsReader extends CsvEntityReader {
 
@@ -89,6 +74,10 @@ public class GtfsReader extends CsvEntityReader {
     _entityClasses.add(Pathway.class);
     _entityClasses.add(Transfer.class);
     _entityClasses.add(FeedInfo.class);
+
+    _entityClasses.add(Driver.class);
+    _entityClasses.add(Vehicle.class);
+    _entityClasses.add(DriverVehicleAssignment.class);
 
     CsvTokenizerStrategy tokenizerStrategy = new CsvTokenizerStrategy();
     tokenizerStrategy.getCsvParser().setTrimInitialWhitespace(true);
@@ -250,6 +239,12 @@ public class GtfsReader extends CsvEntityReader {
       } else if (entity instanceof FareAttribute) {
         FareAttribute fare = (FareAttribute) entity;
         registerAgencyId(FareAttribute.class, fare.getId());
+      } else if (entity instanceof Vehicle) {
+        Vehicle vehicle = (Vehicle) entity;
+        registerAgencyId(Vehicle.class, vehicle.getId());
+      } else if (entity instanceof Driver) {
+        Driver driver = (Driver) entity;
+        registerAgencyId(Driver.class, driver.getId());
       }
 
       if (entity instanceof IdentityBean<?>) {

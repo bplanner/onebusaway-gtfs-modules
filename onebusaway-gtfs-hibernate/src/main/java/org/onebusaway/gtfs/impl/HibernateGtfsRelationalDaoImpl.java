@@ -17,34 +17,20 @@
  */
 package org.onebusaway.gtfs.impl;
 
+import org.hibernate.SessionFactory;
+import org.onebusaway.gtfs.model.*;
+import org.onebusaway.gtfs.model.calendar.ServiceDate;
+import org.onebusaway.gtfs.services.GtfsMutableRelationalDao;
+import org.onebusaway.gtfs.services.GtfsRelationalDao;
+import org.onebusaway.gtfs.services.HibernateOperation;
+import org.onebusaway.gtfs.services.HibernateOperations;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.hibernate.SessionFactory;
-import org.onebusaway.gtfs.model.Agency;
-import org.onebusaway.gtfs.model.AgencyAndId;
-import org.onebusaway.gtfs.model.FareAttribute;
-import org.onebusaway.gtfs.model.FareRule;
-import org.onebusaway.gtfs.model.FeedInfo;
-import org.onebusaway.gtfs.model.Frequency;
-import org.onebusaway.gtfs.model.IdentityBean;
-import org.onebusaway.gtfs.model.Pathway;
-import org.onebusaway.gtfs.model.Route;
-import org.onebusaway.gtfs.model.ServiceCalendar;
-import org.onebusaway.gtfs.model.ServiceCalendarDate;
-import org.onebusaway.gtfs.model.ShapePoint;
-import org.onebusaway.gtfs.model.Stop;
-import org.onebusaway.gtfs.model.StopTime;
-import org.onebusaway.gtfs.model.Transfer;
-import org.onebusaway.gtfs.model.Trip;
-import org.onebusaway.gtfs.services.GtfsMutableRelationalDao;
-import org.onebusaway.gtfs.services.GtfsRelationalDao;
-import org.onebusaway.gtfs.services.HibernateOperation;
-import org.onebusaway.gtfs.services.HibernateOperations;
 
 public class HibernateGtfsRelationalDaoImpl implements GtfsMutableRelationalDao {
 
@@ -180,6 +166,36 @@ public class HibernateGtfsRelationalDaoImpl implements GtfsMutableRelationalDao 
   @Override
   public Pathway getPathwayForId(AgencyAndId agencyAndId) {
     return (Pathway) _ops.get(Pathway.class, agencyAndId);
+  }
+
+  @Override
+  public Collection<Vehicle> getAllVehicles() {
+    return getAllEntitiesForType(Vehicle.class);
+  }
+
+  @Override
+  public Vehicle getVehicleForId(AgencyAndId id) {
+    return (Vehicle) _ops.get(Vehicle.class, id);
+  }
+
+  @Override
+  public Collection<Driver> getAllDrivers() {
+    return getAllEntitiesForType(Driver.class);
+  }
+
+  @Override
+  public Driver getDriverForId(AgencyAndId id) {
+    return (Driver) _ops.get(Driver.class, id);
+  }
+
+  @Override
+  public Collection<DriverVehicleAssignment> getAllDriverVehicleAssignments() {
+    return getAllEntitiesForType(DriverVehicleAssignment.class);
+  }
+
+  @Override
+  public DriverVehicleAssignment getDriverVehicleAssignmentForId(int id) {
+    return (DriverVehicleAssignment) _ops.get(DriverVehicleAssignment.class, id);
   }
 
   @Override
@@ -332,6 +348,31 @@ public class HibernateGtfsRelationalDaoImpl implements GtfsMutableRelationalDao 
   public List<FareRule> getFareRulesForFareAttribute(FareAttribute fareAttribute) {
     return _ops.findByNamedQueryAndNamedParam("fareRulesForFareAttribute",
         "fareAttribute", fareAttribute);
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForTrip(Trip trip) {
+    return null;
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForDriver(Driver driver) {
+    return null;
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForVehicle(Vehicle vehicle) {
+    return null;
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForServiceDate(ServiceDate serviceDate) {
+    return null;
+  }
+
+  @Override
+  public DriverVehicleAssignment getDriverVehicleAssigmentsForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    return null;
   }
 
   /****

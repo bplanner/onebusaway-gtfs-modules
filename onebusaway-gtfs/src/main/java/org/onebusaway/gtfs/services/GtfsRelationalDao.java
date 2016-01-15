@@ -17,18 +17,8 @@
  */
 package org.onebusaway.gtfs.services;
 
-import org.onebusaway.gtfs.model.Agency;
-import org.onebusaway.gtfs.model.AgencyAndId;
-import org.onebusaway.gtfs.model.FareAttribute;
-import org.onebusaway.gtfs.model.FareRule;
-import org.onebusaway.gtfs.model.Frequency;
-import org.onebusaway.gtfs.model.Route;
-import org.onebusaway.gtfs.model.ServiceCalendar;
-import org.onebusaway.gtfs.model.ServiceCalendarDate;
-import org.onebusaway.gtfs.model.ShapePoint;
-import org.onebusaway.gtfs.model.Stop;
-import org.onebusaway.gtfs.model.StopTime;
-import org.onebusaway.gtfs.model.Trip;
+import org.onebusaway.gtfs.model.*;
+import org.onebusaway.gtfs.model.calendar.ServiceDate;
 
 import java.util.List;
 
@@ -128,4 +118,17 @@ public interface GtfsRelationalDao extends GtfsDao {
 
   public List<FareRule> getFareRulesForFareAttribute(FareAttribute fareAttribute);
 
+  /****
+   * {@link DriverVehicleAssignment} Methods
+   *****/
+
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForTrip(Trip trip);
+
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForDriver(Driver driver);
+
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForVehicle(Vehicle vehicle);
+
+  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForServiceDate(ServiceDate serviceDate);
+
+  public DriverVehicleAssignment getDriverVehicleAssigmentsForTripAndDate(Trip trip, ServiceDate serviceDate);
 }

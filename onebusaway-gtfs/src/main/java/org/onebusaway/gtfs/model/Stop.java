@@ -43,6 +43,9 @@ public final class Stop extends IdentityBean<AgencyAndId> {
   private String code;
 
   @CsvField(optional = true)
+  private String extCode;
+
+  @CsvField(optional = true)
   private String desc;
 
   @CsvField(name="zone_id", optional = true)
@@ -79,6 +82,7 @@ public final class Stop extends IdentityBean<AgencyAndId> {
   public Stop(Stop obj) {
     this.id = obj.id;
     this.code = obj.code;
+    this.extCode = obj.extCode;
     this.name = obj.name;
     this.desc = obj.desc;
     this.lat = obj.lat;
@@ -108,6 +112,14 @@ public final class Stop extends IdentityBean<AgencyAndId> {
 
   public void setCode(String code) {
     this.code = code;
+  }
+
+  public String getExtCode() {
+    return extCode;
+  }
+
+  public void setExtCode(String extCode) {
+    this.extCode = extCode;
   }
 
   public String getName() {

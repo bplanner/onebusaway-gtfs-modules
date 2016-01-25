@@ -28,16 +28,16 @@ public class Driver extends IdentityBean<AgencyAndId> {
     @CsvField(mapping = DefaultAgencyIdFieldMappingFactory.class)
     private AgencyAndId id;
 
-    private String code;
+    private String extCode;
 
     private String name;
 
-    public String getCode() {
-        return code;
+    public String getExtCode() {
+        return extCode;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setExtCode(String extCode) {
+        this.extCode = extCode;
     }
 
     public String getName() {

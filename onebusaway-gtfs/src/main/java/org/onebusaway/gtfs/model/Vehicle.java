@@ -29,6 +29,9 @@ public class Vehicle extends IdentityBean<AgencyAndId> {
     @CsvField(mapping = DefaultAgencyIdFieldMappingFactory.class)
     private AgencyAndId id;
 
+    @CsvField(optional = true)
+    private String extCode;
+
     private String licensePlate;
 
     private int routeType;
@@ -62,6 +65,14 @@ public class Vehicle extends IdentityBean<AgencyAndId> {
 
     public void setRouteType(int routeType) {
         this.routeType = routeType;
+    }
+
+    public String getExtCode() {
+        return extCode;
+    }
+
+    public void setExtCode(String extCode) {
+        this.extCode = extCode;
     }
 
     public String getLabel() {

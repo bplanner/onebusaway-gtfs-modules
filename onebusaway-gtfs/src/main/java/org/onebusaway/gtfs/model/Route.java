@@ -36,6 +36,9 @@ public final class Route extends IdentityBean<AgencyAndId> {
   @CsvField(optional = true, alwaysIncludeInOutput = true)
   private String shortName;
 
+  @CsvField(optional = true)
+  private String extCode;
+
   @CsvField(optional = true, alwaysIncludeInOutput = true)
   private String longName;
 
@@ -74,6 +77,7 @@ public final class Route extends IdentityBean<AgencyAndId> {
     this.id = r.id;
     this.agency = r.agency;
     this.shortName = r.shortName;
+    this.extCode = r.extCode;
     this.longName = r.longName;
     this.desc = r.desc;
     this.type = r.type;
@@ -106,6 +110,14 @@ public final class Route extends IdentityBean<AgencyAndId> {
 
   public void setShortName(String shortName) {
     this.shortName = shortName;
+  }
+
+  public String getExtCode() {
+    return extCode;
+  }
+
+  public void setExtCode(String extCode) {
+    this.extCode = extCode;
   }
 
   public String getLongName() {

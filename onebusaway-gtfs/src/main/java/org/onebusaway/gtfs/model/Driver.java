@@ -28,7 +28,17 @@ public class Driver extends IdentityBean<AgencyAndId> {
     @CsvField(mapping = DefaultAgencyIdFieldMappingFactory.class)
     private AgencyAndId id;
 
+    private String code;
+
     private String name;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getName() {
         return name;

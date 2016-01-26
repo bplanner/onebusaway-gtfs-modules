@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package org.onebusaway.gtfs.model;
-
 import org.onebusaway.csv_entities.schema.annotations.CsvField;
 import org.onebusaway.csv_entities.schema.annotations.CsvFields;
 import org.onebusaway.gtfs.serialization.mappings.DefaultAgencyIdFieldMappingFactory;
@@ -28,17 +27,10 @@ public class Driver extends IdentityBean<AgencyAndId> {
     @CsvField(mapping = DefaultAgencyIdFieldMappingFactory.class)
     private AgencyAndId id;
 
-    private String extCode;
-
     private String name;
 
-    public String getExtCode() {
-        return extCode;
-    }
-
-    public void setExtCode(String extCode) {
-        this.extCode = extCode;
-    }
+    @CsvField(optional = true)
+    private String extCode;
 
     public String getName() {
         return name;
@@ -46,6 +38,14 @@ public class Driver extends IdentityBean<AgencyAndId> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getExtCode() {
+        return extCode;
+    }
+
+    public void setExtCode(String extCode) {
+        this.extCode = extCode;
     }
 
     /****

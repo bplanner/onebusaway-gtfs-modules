@@ -37,7 +37,7 @@ public class Vehicle extends IdentityBean<AgencyAndId> {
     private int routeType;
 
     @CsvField(optional = true)
-    private String label;
+    private String model;
 
     @CsvField(optional = true)
     private int capacity;
@@ -75,12 +75,12 @@ public class Vehicle extends IdentityBean<AgencyAndId> {
         this.extCode = extCode;
     }
 
-    public String getLabel() {
-        return label;
+    public String getModel() {
+        return model;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public int getCapacity() {

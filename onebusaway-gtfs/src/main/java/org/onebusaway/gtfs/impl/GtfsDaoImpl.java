@@ -180,6 +180,16 @@ public class GtfsDaoImpl extends GenericDaoImpl implements GtfsMutableDao {
     return getEntityForId(DriverVehicleAssignment.class, id);
   }
 
+  @Override
+  public Collection<IvuTripId> getAllIvuTripIds() {
+    return getAllEntitiesForType(IvuTripId.class);
+  }
+
+  @Override
+  public IvuTripId getIvuTripIdForId(int id) {
+    return getEntityForId(IvuTripId.class, id);
+  }
+
   public Route getRouteForId(AgencyAndId id) {
     return getEntityForId(Route.class, id);
   }

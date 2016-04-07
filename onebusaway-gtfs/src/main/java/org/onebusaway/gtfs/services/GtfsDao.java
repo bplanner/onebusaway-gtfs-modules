@@ -115,6 +115,14 @@ public interface GtfsDao extends GenericDao {
   public DriverVehicleAssignment getDriverVehicleAssignmentForId(int id);
 
   /****
+   * {@link IvuTripId} Methods
+   ****/
+
+  public Collection<IvuTripId> getAllIvuTripIds();
+
+  public IvuTripId getIvuTripIdForId(int id);
+
+  /****
    * {@link Route} Methods
    ****/
 

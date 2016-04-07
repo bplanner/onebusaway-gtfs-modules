@@ -122,13 +122,21 @@ public interface GtfsRelationalDao extends GtfsDao {
    * {@link DriverVehicleAssignment} Methods
    *****/
 
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForTrip(Trip trip);
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForTrip(Trip trip);
 
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForDriver(Driver driver);
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForDriver(Driver driver);
 
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForVehicle(Vehicle vehicle);
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForVehicle(Vehicle vehicle);
 
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForServiceDate(ServiceDate serviceDate);
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForServiceDate(ServiceDate serviceDate);
 
-  public DriverVehicleAssignment getDriverVehicleAssigmentsForTripAndDate(Trip trip, ServiceDate serviceDate);
+  public DriverVehicleAssignment getDriverVehicleAssignmentForTripAndDate(Trip trip, ServiceDate serviceDate);
+
+  /****
+   * {@link IvuTripId} Methods
+   *****/
+
+  public List<IvuTripId> getIvuTripIdsForTrip(Trip trip);
+
+  public IvuTripId getIvuTripIdForTripAndDate(Trip trip, ServiceDate serviceDate);
 }

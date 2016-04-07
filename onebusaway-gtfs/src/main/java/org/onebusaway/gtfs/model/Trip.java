@@ -60,18 +60,6 @@ public final class Trip extends IdentityBean<AgencyAndId> {
   @CsvField(optional = true, defaultValue = "0")
   private int tripBikesAllowed = 0;
 
-  // GTFS-IVU összerendeléshez
-  @CsvField(optional = true)
-  private String extTripId_fpId;
-  @CsvField(optional = true)
-  private String extTripId_wul;
-  @CsvField(optional = true)
-  private String extTripId_lfdNr;
-  @CsvField(optional = true)
-  private String extTripId_kurs;
-  @CsvField(optional = true)
-  private String extTripId;
-
   /**
    * 0 = unknown / unspecified, 1 = bikes allowed, 2 = bikes NOT allowed
    */
@@ -201,47 +189,6 @@ public final class Trip extends IdentityBean<AgencyAndId> {
   public void setBikesAllowed(int bikesAllowed) {
     this.bikesAllowed = bikesAllowed;
   }
-
-  public String getExtTripId_fpId() {
-    return extTripId_fpId;
-  }
-
-  public void setExtTripId_fpId(String extTripId_fpId) {
-    this.extTripId_fpId = extTripId_fpId;
-  }
-
-  public String getExtTripId_wul() {
-    return extTripId_wul;
-  }
-
-  public void setExtTripId_wul(String extTripId_wul) {
-    this.extTripId_wul = extTripId_wul;
-  }
-
-  public String getExtTripId_lfdNr() {
-    return extTripId_lfdNr;
-  }
-
-  public void setExtTripId_lfdNr(String extTripId_lfdNr) {
-    this.extTripId_lfdNr = extTripId_lfdNr;
-  }
-
-  public String getExtTripId() {
-    return extTripId;
-  }
-
-  public void setExtTripId(String extTripId) {
-    this.extTripId = extTripId;
-  }
-
-  public String getExtTripId_kurs() {
-    return extTripId_kurs;
-  }
-
-  public void setExtTripId_kurs(String extTripId_kurs) {
-    this.extTripId_kurs = extTripId_kurs;
-  }
-
 
   public String toString() {
     return "<Trip " + getId() + ">";

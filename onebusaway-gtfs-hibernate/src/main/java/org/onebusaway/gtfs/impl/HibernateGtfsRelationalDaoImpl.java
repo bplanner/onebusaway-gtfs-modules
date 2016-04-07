@@ -199,6 +199,16 @@ public class HibernateGtfsRelationalDaoImpl implements GtfsMutableRelationalDao 
   }
 
   @Override
+  public Collection<IvuTripId> getAllIvuTripIds() {
+    return getAllEntitiesForType(IvuTripId.class);
+  }
+
+  @Override
+  public IvuTripId getIvuTripIdForId(int id) {
+    return (IvuTripId) _ops.get(IvuTripId.class, id);
+  }
+
+  @Override
   public Route getRouteForId(AgencyAndId id) {
     return (Route) _ops.get(Route.class, id);
   }
@@ -351,27 +361,37 @@ public class HibernateGtfsRelationalDaoImpl implements GtfsMutableRelationalDao 
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForTrip(Trip trip) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForTrip(Trip trip) {
     return null;
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForDriver(Driver driver) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForDriver(Driver driver) {
     return null;
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForVehicle(Vehicle vehicle) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForVehicle(Vehicle vehicle) {
     return null;
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForServiceDate(ServiceDate serviceDate) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForServiceDate(ServiceDate serviceDate) {
     return null;
   }
 
   @Override
-  public DriverVehicleAssignment getDriverVehicleAssigmentsForTripAndDate(Trip trip, ServiceDate serviceDate) {
+  public DriverVehicleAssignment getDriverVehicleAssignmentForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    return null;
+  }
+
+  @Override
+  public List<IvuTripId> getIvuTripIdsForTrip(Trip trip) {
+    return null;
+  }
+
+  @Override
+  public IvuTripId getIvuTripIdForTripAndDate(Trip trip, ServiceDate serviceDate) {
     return null;
   }
 

@@ -81,6 +81,8 @@ public class GtfsRelationalDaoImpl extends GtfsDaoImpl implements
 
   private Map<ServiceDate, List<DriverVehicleAssignment>> _driverVehicleAssignmentByServiceDate = null;
 
+  private Map<Trip, List<IvuTripId>> _ivuTripIdsByTrip = null;
+
   public void clearAllCaches() {
     _tripAgencyIdsByServiceId = clearMap(_tripAgencyIdsByServiceId);
     _routesByAgency = clearMap(_routesByAgency);
@@ -290,38 +292,55 @@ public class GtfsRelationalDaoImpl extends GtfsDaoImpl implements
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForTrip(Trip trip) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForTrip(Trip trip) {
     if (_driverVehicleAssignmentByTrip == null)
       _driverVehicleAssignmentByTrip = mapToValueList(getAllDriverVehicleAssignments(), "trip", Trip.class);
     return list(_driverVehicleAssignmentByTrip.get(trip));
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForDriver(Driver driver) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForDriver(Driver driver) {
     if (_driverVehicleAssignmentByDriver == null)
       _driverVehicleAssignmentByDriver = mapToValueList(getAllDriverVehicleAssignments(), "driver", Driver.class);
     return list(_driverVehicleAssignmentByDriver.get(driver));
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForVehicle(Vehicle vehicle) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForVehicle(Vehicle vehicle) {
     if (_driverVehicleAssignmentByVehicle == null)
       _driverVehicleAssignmentByVehicle = mapToValueList(getAllDriverVehicleAssignments(), "vehicle", Vehicle.class);
     return list(_driverVehicleAssignmentByVehicle.get(vehicle));
   }
 
   @Override
-  public List<DriverVehicleAssignment> getDriverVehicleAssigmentsForServiceDate(ServiceDate serviceDate) {
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForServiceDate(ServiceDate serviceDate) {
     if (_driverVehicleAssignmentByServiceDate == null)
       _driverVehicleAssignmentByServiceDate = mapToValueList(getAllDriverVehicleAssignments(), "date", ServiceDate.class);
     return list(_driverVehicleAssignmentByServiceDate.get(serviceDate));
   }
 
   @Override
-  public DriverVehicleAssignment getDriverVehicleAssigmentsForTripAndDate(Trip trip, ServiceDate serviceDate) {
-    for(DriverVehicleAssignment driverVehicleAssignment : getDriverVehicleAssigmentsForTrip(trip)) {
+  public DriverVehicleAssignment getDriverVehicleAssignmentForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    for(DriverVehicleAssignment driverVehicleAssignment : getDriverVehicleAssignmentsForTrip(trip)) {
       if(Objects.equals(driverVehicleAssignment.getDate(), serviceDate)) {
         return driverVehicleAssignment;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public List<IvuTripId> getIvuTripIdsForTrip(Trip trip) {
+    if (_ivuTripIdsByTrip == null)
+      _ivuTripIdsByTrip = mapToValueList(getAllIvuTripIds(), "trip", Trip.class);
+    return list(_ivuTripIdsByTrip.get(trip));
+  }
+
+  @Override
+  public IvuTripId getIvuTripIdForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    for(IvuTripId ivuTripId : getIvuTripIdsForTrip(trip)) {
+      if(Objects.equals(ivuTripId.getDate(), serviceDate)) {
+        return ivuTripId;
       }
     }
     return null;

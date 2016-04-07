@@ -50,6 +50,8 @@ public class GtfsEntitySchemaFactory {
     entityClasses.add(Pathway.class);
     entityClasses.add(Transfer.class);
 
+    entityClasses.add(IvuTripId.class);
+
     entityClasses.add(Vehicle.class);
     entityClasses.add(Driver.class);
     entityClasses.add(DriverVehicleAssignment.class);

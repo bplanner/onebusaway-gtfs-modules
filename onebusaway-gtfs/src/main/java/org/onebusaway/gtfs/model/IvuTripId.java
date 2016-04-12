@@ -36,6 +36,9 @@ public class IvuTripId extends IdentityBean<Integer> {
     @CsvField(name = "date", mapping = ServiceDateFieldMappingFactory.class)
     private ServiceDate date;
 
+    @CsvField(name = "ivu_date", mapping = ServiceDateFieldMappingFactory.class)
+    private ServiceDate ivuDate;
+
     @CsvField(name = "ivu_trip_id")
     private String ivuTripId;
 
@@ -65,6 +68,14 @@ public class IvuTripId extends IdentityBean<Integer> {
 
     public void setDate(ServiceDate date) {
         this.date = date;
+    }
+
+    public ServiceDate getIvuDate() {
+        return ivuDate;
+    }
+
+    public void setIvuDate(ServiceDate ivuDate) {
+        this.ivuDate = ivuDate;
     }
 
     public String getIvuTripId() {

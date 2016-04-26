@@ -18,9 +18,6 @@ import org.onebusaway.csv_entities.schema.annotations.CsvField;
 import org.onebusaway.csv_entities.schema.annotations.CsvFields;
 import org.onebusaway.gtfs.serialization.mappings.DefaultAgencyIdFieldMappingFactory;
 
-/**
- * @author Zsombor Welker <zsombor.welker@webvalto.hu>
- */
 @CsvFields(filename = "drivers.txt", required = false, prefix = "driver_")
 public class Driver extends IdentityBean<AgencyAndId> {
 

@@ -21,9 +21,6 @@ import org.onebusaway.gtfs.model.calendar.ServiceDate;
 import org.onebusaway.gtfs.serialization.mappings.EntityFieldMappingFactory;
 import org.onebusaway.gtfs.serialization.mappings.ServiceDateFieldMappingFactory;
 
-/**
- * @author Zsombor Welker <zsombor.welker@webvalto.hu>
- */
 @CsvFields(filename = "driver_vehicle_assignment.txt", required = false)
 public class DriverVehicleAssignment extends IdentityBean<Integer> {
 

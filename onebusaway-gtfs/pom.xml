@@ -5,12 +5,12 @@
 
   <name>onebusaway-gtfs</name>
   <description>A Java library for reading and writing General Transit Feed Spec feeds</description>
-  <version>1.3.5.WV-SNAPSHOT</version>
+  <version>1.3.6-WV1</version>
 
   <parent>
-    <groupId>hu.webvalto.realcity</groupId>
+    <groupId>io.realcity</groupId>
     <artifactId>onebusaway-gtfs-modules</artifactId>
-    <version>1.3.6</version>
+    <version>1.3.6-WV1</version>
   </parent>
 
   <dependencies>

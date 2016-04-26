@@ -15,9 +15,6 @@
  */
 package org.onebusaway.gtfs_transformer.deferred;
 
-import java.io.Serializable;
-import java.lang.reflect.Method;
-
 import org.apache.commons.beanutils.Converter;
 import org.onebusaway.csv_entities.schema.BeanWrapper;
 import org.onebusaway.gtfs.model.AgencyAndId;
@@ -26,8 +23,11 @@ import org.onebusaway.gtfs.serialization.GtfsReader;
 import org.onebusaway.gtfs.serialization.GtfsReaderContext;
 import org.onebusaway.gtfs.services.GtfsRelationalDao;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
+
 /**
- * In {@lint ValueSetter} implementations, the source value is often a primitive
+ * In {@link ValueSetter} implementations, the source value is often a primitive
  * string but the target value type is often something more complex: a numeric
  * type, a {@link AgencyAndId}, a field with GTFS-specific formatting, or even a
  * GTFS entity. Often, the value cannot be properly converted until the moment

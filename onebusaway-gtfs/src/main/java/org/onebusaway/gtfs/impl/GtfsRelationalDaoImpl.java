@@ -17,6 +17,13 @@
  */
 package org.onebusaway.gtfs.impl;
 
+import org.onebusaway.csv_entities.exceptions.EntityInstantiationException;
+import org.onebusaway.csv_entities.schema.BeanWrapper;
+import org.onebusaway.csv_entities.schema.BeanWrapperFactory;
+import org.onebusaway.gtfs.model.*;
+import org.onebusaway.gtfs.model.calendar.ServiceDate;
+import org.onebusaway.gtfs.services.GtfsMutableRelationalDao;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,24 +31,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
-
-import org.onebusaway.csv_entities.exceptions.EntityInstantiationException;
-import org.onebusaway.csv_entities.schema.BeanWrapper;
-import org.onebusaway.csv_entities.schema.BeanWrapperFactory;
-import org.onebusaway.gtfs.model.Agency;
-import org.onebusaway.gtfs.model.AgencyAndId;
-import org.onebusaway.gtfs.model.FareAttribute;
-import org.onebusaway.gtfs.model.FareRule;
-import org.onebusaway.gtfs.model.Frequency;
-import org.onebusaway.gtfs.model.Route;
-import org.onebusaway.gtfs.model.ServiceCalendar;
-import org.onebusaway.gtfs.model.ServiceCalendarDate;
-import org.onebusaway.gtfs.model.ShapePoint;
-import org.onebusaway.gtfs.model.Stop;
-import org.onebusaway.gtfs.model.StopTime;
-import org.onebusaway.gtfs.model.Trip;
-import org.onebusaway.gtfs.services.GtfsMutableRelationalDao;
 
 /**
  * A in-memory implementation of GtfsRelationalDaoImpl. It's super fast for most
@@ -82,6 +73,16 @@ public class GtfsRelationalDaoImpl extends GtfsDaoImpl implements
 
   private Map<FareAttribute, List<FareRule>> _fareRulesByFareAttribute = null;
 
+  private Map<Trip, List<DriverVehicleAssignment>> _driverVehicleAssignmentByTrip = null;
+
+  private Map<Driver, List<DriverVehicleAssignment>> _driverVehicleAssignmentByDriver = null;
+
+  private Map<Vehicle, List<DriverVehicleAssignment>> _driverVehicleAssignmentByVehicle = null;
+
+  private Map<ServiceDate, List<DriverVehicleAssignment>> _driverVehicleAssignmentByServiceDate = null;
+
+  private Map<Trip, List<IvuTripId>> _ivuTripIdsByTrip = null;
+
   public void clearAllCaches() {
     _tripAgencyIdsByServiceId = clearMap(_tripAgencyIdsByServiceId);
     _routesByAgency = clearMap(_routesByAgency);
@@ -97,6 +98,10 @@ public class GtfsRelationalDaoImpl extends GtfsDaoImpl implements
     _calendarDatesByServiceId = clearMap(_calendarDatesByServiceId);
     _calendarsByServiceId = clearMap(_calendarsByServiceId);
     _fareRulesByFareAttribute = clearMap(_fareRulesByFareAttribute);
+    _driverVehicleAssignmentByTrip = clearMap(_driverVehicleAssignmentByTrip);
+    _driverVehicleAssignmentByDriver = clearMap(_driverVehicleAssignmentByDriver);
+    _driverVehicleAssignmentByVehicle = clearMap(_driverVehicleAssignmentByVehicle);
+    _driverVehicleAssignmentByServiceDate = clearMap(_driverVehicleAssignmentByServiceDate);
   }
 
   @Override
@@ -284,6 +289,61 @@ public class GtfsRelationalDaoImpl extends GtfsDaoImpl implements
           FareAttribute.class);
     }
     return list(_fareRulesByFareAttribute.get(fareAttribute));
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForTrip(Trip trip) {
+    if (_driverVehicleAssignmentByTrip == null)
+      _driverVehicleAssignmentByTrip = mapToValueList(getAllDriverVehicleAssignments(), "trip", Trip.class);
+    return list(_driverVehicleAssignmentByTrip.get(trip));
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForDriver(Driver driver) {
+    if (_driverVehicleAssignmentByDriver == null)
+      _driverVehicleAssignmentByDriver = mapToValueList(getAllDriverVehicleAssignments(), "driver", Driver.class);
+    return list(_driverVehicleAssignmentByDriver.get(driver));
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForVehicle(Vehicle vehicle) {
+    if (_driverVehicleAssignmentByVehicle == null)
+      _driverVehicleAssignmentByVehicle = mapToValueList(getAllDriverVehicleAssignments(), "vehicle", Vehicle.class);
+    return list(_driverVehicleAssignmentByVehicle.get(vehicle));
+  }
+
+  @Override
+  public List<DriverVehicleAssignment> getDriverVehicleAssignmentsForServiceDate(ServiceDate serviceDate) {
+    if (_driverVehicleAssignmentByServiceDate == null)
+      _driverVehicleAssignmentByServiceDate = mapToValueList(getAllDriverVehicleAssignments(), "date", ServiceDate.class);
+    return list(_driverVehicleAssignmentByServiceDate.get(serviceDate));
+  }
+
+  @Override
+  public DriverVehicleAssignment getDriverVehicleAssignmentForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    for(DriverVehicleAssignment driverVehicleAssignment : getDriverVehicleAssignmentsForTrip(trip)) {
+      if(Objects.equals(driverVehicleAssignment.getDate(), serviceDate)) {
+        return driverVehicleAssignment;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public List<IvuTripId> getIvuTripIdsForTrip(Trip trip) {
+    if (_ivuTripIdsByTrip == null)
+      _ivuTripIdsByTrip = mapToValueList(getAllIvuTripIds(), "trip", Trip.class);
+    return list(_ivuTripIdsByTrip.get(trip));
+  }
+
+  @Override
+  public IvuTripId getIvuTripIdForTripAndDate(Trip trip, ServiceDate serviceDate) {
+    for(IvuTripId ivuTripId : getIvuTripIdsForTrip(trip)) {
+      if(Objects.equals(ivuTripId.getDate(), serviceDate)) {
+        return ivuTripId;
+      }
+    }
+    return null;
   }
 
   /****

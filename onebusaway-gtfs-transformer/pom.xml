@@ -7,15 +7,15 @@
   <description>A Java library for transforming Google Transit Feed Spec feeds</description>
 
   <parent>
-    <groupId>org.onebusaway</groupId>
+    <groupId>io.realcity</groupId>
     <artifactId>onebusaway-gtfs-modules</artifactId>
-    <version>1.3.5-SNAPSHOT</version>
+    <version>1.3.6-WV1</version>
   </parent>
 
   <dependencies>
 
     <dependency>
-      <groupId>org.onebusaway</groupId>
+      <groupId>${project.parent.groupId}</groupId>
       <artifactId>onebusaway-gtfs</artifactId>
       <version>${project.version}</version>
     </dependency>

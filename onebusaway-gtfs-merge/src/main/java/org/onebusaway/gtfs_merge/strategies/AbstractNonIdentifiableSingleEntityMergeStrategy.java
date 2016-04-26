@@ -18,6 +18,7 @@ package org.onebusaway.gtfs_merge.strategies;
 import org.onebusaway.gtfs.model.FareRule;
 import org.onebusaway.gtfs.model.Frequency;
 import org.onebusaway.gtfs.model.IdentityBean;
+import org.onebusaway.gtfs.model.Transfer;
 import org.onebusaway.gtfs.services.GtfsMutableRelationalDao;
 import org.onebusaway.gtfs_merge.GtfsMergeContext;
 

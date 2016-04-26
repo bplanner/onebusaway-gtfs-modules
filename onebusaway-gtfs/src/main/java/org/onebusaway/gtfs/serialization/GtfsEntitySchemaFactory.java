@@ -16,35 +16,20 @@
  */
 package org.onebusaway.gtfs.serialization;
 
+import org.onebusaway.csv_entities.schema.DefaultEntitySchemaFactory;
+import org.onebusaway.csv_entities.schema.EntitySchemaFactoryHelper;
+import org.onebusaway.csv_entities.schema.beans.CsvEntityMappingBean;
+import org.onebusaway.gtfs.model.*;
+import org.onebusaway.gtfs.serialization.comparators.ServiceCalendarComparator;
+import org.onebusaway.gtfs.serialization.comparators.ServiceCalendarDateComparator;
+import org.onebusaway.gtfs.serialization.comparators.ShapePointComparator;
+import org.onebusaway.gtfs.serialization.comparators.StopTimeComparator;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.onebusaway.csv_entities.schema.DefaultEntitySchemaFactory;
-import org.onebusaway.csv_entities.schema.EntitySchemaFactoryHelper;
-import org.onebusaway.csv_entities.schema.beans.CsvEntityMappingBean;
-import org.onebusaway.gtfs.model.Agency;
-import org.onebusaway.gtfs.model.AgencyAndId;
-import org.onebusaway.gtfs.model.FareAttribute;
-import org.onebusaway.gtfs.model.FareRule;
-import org.onebusaway.gtfs.model.FeedInfo;
-import org.onebusaway.gtfs.model.Frequency;
-import org.onebusaway.gtfs.model.IdentityBean;
-import org.onebusaway.gtfs.model.Pathway;
-import org.onebusaway.gtfs.model.Route;
-import org.onebusaway.gtfs.model.ServiceCalendar;
-import org.onebusaway.gtfs.model.ServiceCalendarDate;
-import org.onebusaway.gtfs.model.ShapePoint;
-import org.onebusaway.gtfs.model.Stop;
-import org.onebusaway.gtfs.model.StopTime;
-import org.onebusaway.gtfs.model.Transfer;
-import org.onebusaway.gtfs.model.Trip;
-import org.onebusaway.gtfs.serialization.comparators.ServiceCalendarComparator;
-import org.onebusaway.gtfs.serialization.comparators.ServiceCalendarDateComparator;
-import org.onebusaway.gtfs.serialization.comparators.ShapePointComparator;
-import org.onebusaway.gtfs.serialization.comparators.StopTimeComparator;
 
 public class GtfsEntitySchemaFactory {
 
@@ -64,6 +49,13 @@ public class GtfsEntitySchemaFactory {
     entityClasses.add(Frequency.class);
     entityClasses.add(Pathway.class);
     entityClasses.add(Transfer.class);
+
+    entityClasses.add(IvuTripId.class);
+
+    entityClasses.add(Vehicle.class);
+    entityClasses.add(Driver.class);
+    entityClasses.add(DriverVehicleAssignment.class);
+
     return entityClasses;
   }
 

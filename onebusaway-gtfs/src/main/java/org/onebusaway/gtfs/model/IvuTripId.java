@@ -21,9 +21,6 @@ import org.onebusaway.gtfs.model.calendar.ServiceDate;
 import org.onebusaway.gtfs.serialization.mappings.EntityFieldMappingFactory;
 import org.onebusaway.gtfs.serialization.mappings.ServiceDateFieldMappingFactory;
 
-/**
- * @author Zsombor Welker <zsombor.welker@webvalto.hu>
- */
 @CsvFields(filename = "ivu_trip_ids.txt", required = false)
 public class IvuTripId extends IdentityBean<Integer> {
 
@@ -53,6 +50,9 @@ public class IvuTripId extends IdentityBean<Integer> {
 
     @CsvField(name = "ivu_kurs_id")
     private String ivuKursId;
+
+    @CsvField(name = "forte_block_id")
+    private String forteBlockId;
 
     public Trip getTrip() {
         return trip;
@@ -116,6 +116,14 @@ public class IvuTripId extends IdentityBean<Integer> {
 
     public void setIvuKursId(String ivuKursId) {
         this.ivuKursId = ivuKursId;
+    }
+
+    public String getForteBlockId() {
+        return forteBlockId;
+    }
+
+    public void setForteBlockId(String forteBlockId) {
+        this.forteBlockId = forteBlockId;
     }
 
     /****

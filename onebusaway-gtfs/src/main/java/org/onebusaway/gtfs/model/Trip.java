@@ -26,6 +26,17 @@ public final class Trip extends IdentityBean<AgencyAndId> {
 
   private static final long serialVersionUID = 2L;
 
+  /** Passenger journey (in the timetable) */
+  public static final int TYPE_PASSENGER_JOURNEY = 0;
+  /** Pull-out journey */
+  public static final int TYPE_PULL_OUT = 1;
+  /** Pull-in journey */
+  public static final int TYPE_PULL_IN = 2;
+  /** Relief and transfer (vehicle transfer-, non-revenue journey, or similar) */
+  public static final int TYPE_NON_REVENUE = 3;
+  /** Layover journey (vehicle transfer within a layover facility) */
+  public static final int TYPE_LAYOVER = 4;
+
   @CsvField(name = "trip_id", mapping = TripAgencyIdFieldMappingFactory.class)
   private AgencyAndId id;
 
@@ -66,6 +77,18 @@ public final class Trip extends IdentityBean<AgencyAndId> {
   @CsvField(optional = true, defaultValue = "0")
   private int bikesAllowed = 0;
 
+  /**
+   * 0 = passenger journey, 1 = pull out, 2 = pull in, 3 = relief and transfer (non-revenue journey), 4 = layover journey
+   *
+   * @link TYPE_PASSENGER_JOURNEY
+   * @link TYPE_PULL_OUT
+   * @link TYPE_PULL_IN
+   * @link TYPE_NON_REVENUE
+   * @link TYPE_LAYOVER
+   */
+  @CsvField(optional = true, defaultValue = "0")
+  private int journeyType = TYPE_PASSENGER_JOURNEY;
+
   // Custom extension for KCM to specify a fare per-trip
   @CsvField(optional = true)
   private String fareId;
@@ -87,6 +110,7 @@ public final class Trip extends IdentityBean<AgencyAndId> {
     this.wheelchairAccessible = obj.wheelchairAccessible;
     this.tripBikesAllowed = obj.tripBikesAllowed;
     this.bikesAllowed = obj.bikesAllowed;
+    this.journeyType = obj.journeyType;
   }
 
   public AgencyAndId getId() {
@@ -193,7 +217,33 @@ public final class Trip extends IdentityBean<AgencyAndId> {
   public void setBikesAllowed(int bikesAllowed) {
     this.bikesAllowed = bikesAllowed;
   }
-  
+
+  /**
+   * 0 = passenger journey, 1 = pull out, 2 = pull in, 3 = relief and transfer (non-revenue journey), 4 = layover journey
+   *
+   * @link TYPE_PASSENGER_JOURNEY
+   * @link TYPE_PULL_OUT
+   * @link TYPE_PULL_IN
+   * @link TYPE_NON_REVENUE
+   * @link TYPE_LAYOVER
+   */
+  public int getJourneyType() {
+    return journeyType;
+  }
+
+  /**
+   * 0 = passenger journey, 1 = pull out, 2 = pull in, 3 = relief and transfer (non-revenue journey), 4 = layover journey
+   *
+   * @link TYPE_PASSENGER_JOURNEY
+   * @link TYPE_PULL_OUT
+   * @link TYPE_PULL_IN
+   * @link TYPE_NON_REVENUE
+   * @link TYPE_LAYOVER
+   */
+  public void setJourneyType(int journeyType) {
+    this.journeyType = journeyType;
+  }
+
   public void setFareId(String fareId) {
 	  this.fareId = fareId;
   }
